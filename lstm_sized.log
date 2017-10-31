@@ -1,0 +1,328 @@
+INFO:root:--------- EVALUATING ---------
+INFO:root:, ADX:: 5, CCI:: 6, MINUS_DI:: 5, PLUS_DI:: 5, STOCH_K:: 12, PSY:: 14
+INFO:root:Train Data:
+INFO:root:            willRise       ADX       CCI  MINUS_DI   PLUS_DI   STOCH_K  \
+Date                                                                     
+2005-01-03         1  1.039532 -0.847586 -0.539571 -1.352166 -1.208826   
+2005-01-10         0  2.799920 -0.939960  1.106361 -1.585562 -0.278600   
+2005-01-11         1  2.096502 -0.927873  0.517132 -1.618742 -0.555692   
+2005-01-13         0  1.202448 -1.127649  0.660672 -1.668512 -1.263989   
+2005-01-31         1 -0.372762 -1.203111 -0.399045 -0.822348  0.121343   
+
+                 PSY  
+Date                  
+2005-01-03 -1.023611  
+2005-01-10 -0.478106  
+2005-01-11 -1.023611  
+2005-01-13 -1.023611  
+2005-01-31  0.067398  
+INFO:hyperopt.tpe:tpe_transform took 0.006565 seconds
+INFO:hyperopt.tpe:TPE using 0 trials
+INFO:hyperopt.tpe:tpe_transform took 0.009327 seconds
+INFO:hyperopt.tpe:TPE using 1/1 trials with best loss 0.430279
+INFO:hyperopt.tpe:tpe_transform took 0.009073 seconds
+INFO:hyperopt.tpe:TPE using 2/2 trials with best loss 0.390438
+INFO:hyperopt.tpe:tpe_transform took 0.007838 seconds
+INFO:hyperopt.tpe:TPE using 3/3 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.007872 seconds
+INFO:hyperopt.tpe:TPE using 4/4 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.009450 seconds
+INFO:hyperopt.tpe:TPE using 5/5 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.009528 seconds
+INFO:hyperopt.tpe:TPE using 6/6 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.017650 seconds
+INFO:hyperopt.tpe:TPE using 7/7 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.009063 seconds
+INFO:hyperopt.tpe:TPE using 8/8 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.009399 seconds
+INFO:hyperopt.tpe:TPE using 9/9 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.009576 seconds
+INFO:hyperopt.tpe:TPE using 10/10 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.008726 seconds
+INFO:hyperopt.tpe:TPE using 11/11 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.008205 seconds
+INFO:hyperopt.tpe:TPE using 12/12 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.007780 seconds
+INFO:hyperopt.tpe:TPE using 13/13 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.009346 seconds
+INFO:hyperopt.tpe:TPE using 14/14 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.013890 seconds
+INFO:hyperopt.tpe:TPE using 15/15 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.013755 seconds
+INFO:hyperopt.tpe:TPE using 16/16 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.009164 seconds
+INFO:hyperopt.tpe:TPE using 17/17 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.008463 seconds
+INFO:hyperopt.tpe:TPE using 18/18 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.008663 seconds
+INFO:hyperopt.tpe:TPE using 19/19 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.013769 seconds
+INFO:hyperopt.tpe:TPE using 20/20 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.015278 seconds
+INFO:hyperopt.tpe:TPE using 21/21 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.009017 seconds
+INFO:hyperopt.tpe:TPE using 22/22 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.007757 seconds
+INFO:hyperopt.tpe:TPE using 23/23 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.009496 seconds
+INFO:hyperopt.tpe:TPE using 24/24 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.008719 seconds
+INFO:hyperopt.tpe:TPE using 25/25 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.009465 seconds
+INFO:hyperopt.tpe:TPE using 26/26 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.009486 seconds
+INFO:hyperopt.tpe:TPE using 27/27 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.007784 seconds
+INFO:hyperopt.tpe:TPE using 28/28 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.008781 seconds
+INFO:hyperopt.tpe:TPE using 29/29 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.015022 seconds
+INFO:hyperopt.tpe:TPE using 30/30 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.008643 seconds
+INFO:hyperopt.tpe:TPE using 31/31 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.009097 seconds
+INFO:hyperopt.tpe:TPE using 32/32 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.009456 seconds
+INFO:hyperopt.tpe:TPE using 33/33 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.007938 seconds
+INFO:hyperopt.tpe:TPE using 34/34 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.009546 seconds
+INFO:hyperopt.tpe:TPE using 35/35 trials with best loss 0.378486
+INFO:hyperopt.tpe:tpe_transform took 0.009503 seconds
+INFO:hyperopt.tpe:TPE using 36/36 trials with best loss 0.374502
+INFO:hyperopt.tpe:tpe_transform took 0.009936 seconds
+INFO:hyperopt.tpe:TPE using 37/37 trials with best loss 0.374502
+INFO:hyperopt.tpe:tpe_transform took 0.008700 seconds
+INFO:hyperopt.tpe:TPE using 38/38 trials with best loss 0.374502
+INFO:hyperopt.tpe:tpe_transform took 0.009753 seconds
+INFO:hyperopt.tpe:TPE using 39/39 trials with best loss 0.374502
+INFO:hyperopt.tpe:tpe_transform took 0.008680 seconds
+INFO:hyperopt.tpe:TPE using 40/40 trials with best loss 0.374502
+INFO:hyperopt.tpe:tpe_transform took 0.009861 seconds
+INFO:hyperopt.tpe:TPE using 41/41 trials with best loss 0.374502
+INFO:hyperopt.tpe:tpe_transform took 0.009641 seconds
+INFO:hyperopt.tpe:TPE using 42/42 trials with best loss 0.374502
+INFO:hyperopt.tpe:tpe_transform took 0.149244 seconds
+INFO:hyperopt.tpe:TPE using 43/43 trials with best loss 0.374502
+INFO:hyperopt.tpe:tpe_transform took 0.009446 seconds
+INFO:hyperopt.tpe:TPE using 44/44 trials with best loss 0.374502
+INFO:hyperopt.tpe:tpe_transform took 0.008698 seconds
+INFO:hyperopt.tpe:TPE using 45/45 trials with best loss 0.374502
+INFO:hyperopt.tpe:tpe_transform took 0.008873 seconds
+INFO:hyperopt.tpe:TPE using 46/46 trials with best loss 0.374502
+INFO:hyperopt.tpe:tpe_transform took 0.008732 seconds
+INFO:hyperopt.tpe:TPE using 47/47 trials with best loss 0.374502
+INFO:hyperopt.tpe:tpe_transform took 0.009092 seconds
+INFO:hyperopt.tpe:TPE using 48/48 trials with best loss 0.374502
+INFO:hyperopt.tpe:tpe_transform took 0.008913 seconds
+INFO:hyperopt.tpe:TPE using 49/49 trials with best loss 0.374502
+INFO:root::BEST:
+INFO:root:{'optimizer': 1, 'activation': 1, 'dropout1': 0, 'units2': 4, 'num_layers': 1, 'dropout2': 0, 'units1': 1, 'nb_epochs': 3, 'units3': 1, 'dropout3': 0}
+INFO:root:---- Accuracy ----
+INFO:root:0.6254980079681275
+INFO:root:--------- EVALUATING ---------
+INFO:root:, ADX:: 5, CCI:: 6, MINUS_DI:: 5, PLUS_DI:: 5, WMA:: 10, PSY:: 13
+INFO:root:Train Data:
+INFO:root:            willRise       ADX       CCI  MINUS_DI   PLUS_DI       WMA  \
+Date                                                                     
+2005-01-03         1  1.039532 -0.847586 -0.539571 -1.352166 -0.121075   
+2005-01-10         0  2.799920 -0.939960  1.106361 -1.585562  0.071013   
+2005-01-11         1  2.096502 -0.927873  0.517132 -1.618742 -0.005822   
+2005-01-13         0  1.202448 -1.127649  0.660672 -1.668512 -0.543668   
+2005-01-31         1 -0.372762 -1.203111 -0.399045 -0.822348  0.378354   
+
+                 PSY  
+Date                  
+2005-01-03 -0.786489  
+2005-01-10 -0.786489  
+2005-01-11 -0.786489  
+2005-01-13 -0.786489  
+2005-01-31  0.351507  
+INFO:hyperopt.tpe:tpe_transform took 0.008363 seconds
+INFO:hyperopt.tpe:TPE using 0 trials
+INFO:hyperopt.tpe:tpe_transform took 0.008799 seconds
+INFO:hyperopt.tpe:TPE using 1/1 trials with best loss 0.350598
+INFO:hyperopt.tpe:tpe_transform took 0.009173 seconds
+INFO:hyperopt.tpe:TPE using 2/2 trials with best loss 0.350598
+INFO:hyperopt.tpe:tpe_transform took 0.008563 seconds
+INFO:hyperopt.tpe:TPE using 3/3 trials with best loss 0.350598
+INFO:hyperopt.tpe:tpe_transform took 0.015174 seconds
+INFO:hyperopt.tpe:TPE using 4/4 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008511 seconds
+INFO:hyperopt.tpe:TPE using 5/5 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.009047 seconds
+INFO:hyperopt.tpe:TPE using 6/6 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008726 seconds
+INFO:hyperopt.tpe:TPE using 7/7 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008534 seconds
+INFO:hyperopt.tpe:TPE using 8/8 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.010379 seconds
+INFO:hyperopt.tpe:TPE using 9/9 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008812 seconds
+INFO:hyperopt.tpe:TPE using 10/10 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.007824 seconds
+INFO:hyperopt.tpe:TPE using 11/11 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.013979 seconds
+INFO:hyperopt.tpe:TPE using 12/12 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.007930 seconds
+INFO:hyperopt.tpe:TPE using 13/13 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008805 seconds
+INFO:hyperopt.tpe:TPE using 14/14 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008846 seconds
+INFO:hyperopt.tpe:TPE using 15/15 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.075745 seconds
+INFO:hyperopt.tpe:TPE using 16/16 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.014230 seconds
+INFO:hyperopt.tpe:TPE using 17/17 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008282 seconds
+INFO:hyperopt.tpe:TPE using 18/18 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008789 seconds
+INFO:hyperopt.tpe:TPE using 19/19 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.007859 seconds
+INFO:hyperopt.tpe:TPE using 20/20 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008992 seconds
+INFO:hyperopt.tpe:TPE using 21/21 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.009455 seconds
+INFO:hyperopt.tpe:TPE using 22/22 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008940 seconds
+INFO:hyperopt.tpe:TPE using 23/23 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008780 seconds
+INFO:hyperopt.tpe:TPE using 24/24 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.007383 seconds
+INFO:hyperopt.tpe:TPE using 25/25 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008835 seconds
+INFO:hyperopt.tpe:TPE using 26/26 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.154099 seconds
+INFO:hyperopt.tpe:TPE using 27/27 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008697 seconds
+INFO:hyperopt.tpe:TPE using 28/28 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.007797 seconds
+INFO:hyperopt.tpe:TPE using 29/29 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.013862 seconds
+INFO:hyperopt.tpe:TPE using 30/30 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.013798 seconds
+INFO:hyperopt.tpe:TPE using 31/31 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.009559 seconds
+INFO:hyperopt.tpe:TPE using 32/32 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.007797 seconds
+INFO:hyperopt.tpe:TPE using 33/33 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008819 seconds
+INFO:hyperopt.tpe:TPE using 34/34 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.007931 seconds
+INFO:hyperopt.tpe:TPE using 35/35 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.009111 seconds
+INFO:hyperopt.tpe:TPE using 36/36 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008961 seconds
+INFO:hyperopt.tpe:TPE using 37/37 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008317 seconds
+INFO:hyperopt.tpe:TPE using 38/38 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008985 seconds
+INFO:hyperopt.tpe:TPE using 39/39 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008739 seconds
+INFO:hyperopt.tpe:TPE using 40/40 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.016456 seconds
+INFO:hyperopt.tpe:TPE using 41/41 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008847 seconds
+INFO:hyperopt.tpe:TPE using 42/42 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.009636 seconds
+INFO:hyperopt.tpe:TPE using 43/43 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008679 seconds
+INFO:hyperopt.tpe:TPE using 44/44 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008096 seconds
+INFO:hyperopt.tpe:TPE using 45/45 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.014508 seconds
+INFO:hyperopt.tpe:TPE using 46/46 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.009057 seconds
+INFO:hyperopt.tpe:TPE using 47/47 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.018721 seconds
+INFO:hyperopt.tpe:TPE using 48/48 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.013730 seconds
+INFO:hyperopt.tpe:TPE using 49/49 trials with best loss 0.346614
+INFO:root::BEST:
+INFO:root:{'optimizer': 0, 'activation': 0, 'dropout1': 1, 'units2': 2, 'num_layers': 1, 'dropout2': 0, 'units1': 5, 'nb_epochs': 0, 'units3': 5, 'dropout3': 0}
+INFO:root:---- Accuracy ----
+INFO:root:0.6533864541832669
+INFO:root:--------- EVALUATING ---------
+INFO:root:, ADX:: 5, CCI:: 6, MINUS_DI:: 5, PLUS_DI:: 5, STOCH_K:: 12, WMA:: 10, PSY:: 12
+INFO:root:Train Data:
+INFO:root:            willRise       ADX       CCI  MINUS_DI   PLUS_DI   STOCH_K  \
+Date                                                                     
+2005-01-03         1  1.039532 -0.847586 -0.539571 -1.352166 -1.208826   
+2005-01-10         0  2.799920 -0.939960  1.106361 -1.585562 -0.278600   
+2005-01-11         1  2.096502 -0.927873  0.517132 -1.618742 -0.555692   
+2005-01-13         0  1.202448 -1.127649  0.660672 -1.668512 -1.263989   
+2005-01-31         1 -0.372762 -1.203111 -0.399045 -0.822348  0.121343   
+
+                 WMA       PSY  
+Date                            
+2005-01-03 -0.121075 -0.526886  
+2005-01-10  0.071013 -0.526886  
+2005-01-11 -0.005822 -1.119635  
+2005-01-13 -0.543668 -1.119635  
+2005-01-31  0.378354  0.065793  
+INFO:hyperopt.tpe:tpe_transform took 0.015377 seconds
+INFO:hyperopt.tpe:TPE using 0 trials
+INFO:hyperopt.tpe:tpe_transform took 0.008686 seconds
+INFO:hyperopt.tpe:TPE using 1/1 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.009804 seconds
+INFO:hyperopt.tpe:TPE using 2/2 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.016066 seconds
+INFO:hyperopt.tpe:TPE using 3/3 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.015327 seconds
+INFO:hyperopt.tpe:TPE using 4/4 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.013920 seconds
+INFO:hyperopt.tpe:TPE using 5/5 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008674 seconds
+INFO:hyperopt.tpe:TPE using 6/6 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.015910 seconds
+INFO:hyperopt.tpe:TPE using 7/7 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.013768 seconds
+INFO:hyperopt.tpe:TPE using 8/8 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.007861 seconds
+INFO:hyperopt.tpe:TPE using 9/9 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.009022 seconds
+INFO:hyperopt.tpe:TPE using 10/10 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.085827 seconds
+INFO:hyperopt.tpe:TPE using 11/11 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.009951 seconds
+INFO:hyperopt.tpe:TPE using 12/12 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.010835 seconds
+INFO:hyperopt.tpe:TPE using 13/13 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.014043 seconds
+INFO:hyperopt.tpe:TPE using 14/14 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.009363 seconds
+INFO:hyperopt.tpe:TPE using 15/15 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.009142 seconds
+INFO:hyperopt.tpe:TPE using 16/16 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008786 seconds
+INFO:hyperopt.tpe:TPE using 17/17 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008667 seconds
+INFO:hyperopt.tpe:TPE using 18/18 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.013722 seconds
+INFO:hyperopt.tpe:TPE using 19/19 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.009465 seconds
+INFO:hyperopt.tpe:TPE using 20/20 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.009631 seconds
+INFO:hyperopt.tpe:TPE using 21/21 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.009133 seconds
+INFO:hyperopt.tpe:TPE using 22/22 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008689 seconds
+INFO:hyperopt.tpe:TPE using 23/23 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.013951 seconds
+INFO:hyperopt.tpe:TPE using 24/24 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.015825 seconds
+INFO:hyperopt.tpe:TPE using 25/25 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.013672 seconds
+INFO:hyperopt.tpe:TPE using 26/26 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008649 seconds
+INFO:hyperopt.tpe:TPE using 27/27 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.008312 seconds
+INFO:hyperopt.tpe:TPE using 28/28 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.013754 seconds
+INFO:hyperopt.tpe:TPE using 29/29 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.009165 seconds
+INFO:hyperopt.tpe:TPE using 30/30 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.083122 seconds
+INFO:hyperopt.tpe:TPE using 31/31 trials with best loss 0.346614
+INFO:hyperopt.tpe:tpe_transform took 0.010267 seconds
+INFO:hyperopt.tpe:TPE using 32/32 trials with best loss 0.346614
