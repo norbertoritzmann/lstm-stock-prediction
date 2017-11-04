@@ -36,7 +36,7 @@ def start_computing():
 
     pool = Pool(processes=1)  # Start a worker processes.
     opt = optimization.Optimization("msft", start_date, end_date, start_test_date, end_test_date)
-    result = pool.apply_async(opt.run, callback)
+    result = pool.apply_async(opt.run, callback=callback)
 
     #pop, log = optimization.run()
 
@@ -60,5 +60,6 @@ def server_error(e):
 if __name__ == '__main__':
     # This is used when running locally. Gunicorn is used to run the
     # application on Google App Engine. See entrypoint in app.yaml.
+    logging.info("Starting...")
     app.run(host='127.0.0.1', port=8080, debug=True)
 # [END app]
