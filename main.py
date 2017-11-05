@@ -12,6 +12,9 @@ app = Flask(__name__)
 
 opt = None
 finished = False
+@app.route('/')
+def index():
+    return "Welcome: <a href='/start_computing'"
 
 @app.route('/best')
 def current_the_best():
