@@ -185,6 +185,8 @@ class LSTMModelHandler:
 
         self.train(validation_data=(self.testX, self.testY), epoch=params['nb_epochs'])
         acc = self.test_measurements()
+        print("result" + str(acc))
+        log.info("result" + str(acc))
 
         if acc > self.best_result['result']:
             print("There is a new best result for: " + str(params))
