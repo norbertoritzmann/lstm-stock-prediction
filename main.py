@@ -26,7 +26,7 @@ def status():
     if finished:
         return "Finished!"
     else:
-        return "Not finished!"
+        return "Not finished! Best: " + str(opt.best_individual) + ", cycle: " + str(opt.cycles)
 
 @app.route('/start_computing')
 def start_computing():
