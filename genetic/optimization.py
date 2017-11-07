@@ -53,6 +53,7 @@ class Optimization(object):
         self.end_test_date = end_test_date
         self.cache = {}
         self.best_individual = {'result': 0.0}
+        self.cycles = 0
 
     def fitness(self, chromosome):
         K.clear_session()
@@ -82,6 +83,7 @@ class Optimization(object):
         log.info("---- Accuracy ----")
         print(result['result'])
         log.info(result['result'])
+        self.cycles += 1
         return (result['result'],)
 
     def check_bounds(self, first, second):
