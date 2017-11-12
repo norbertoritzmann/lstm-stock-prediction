@@ -15,31 +15,31 @@ from util import timeseries
 
 
 class LSTMModelHandler:
-    def __init__(self, trainX, trainY, testX, testY, pipeline_transform=None):
+    def __init__(self, trainX, trainY, testX, testY, best_result, pipeline_transform=None):
         self.trainX, self.trainY = trainX, trainY
         self.testX, self.testY = testX, testY
         self.model = Sequential()
         self.input_layer_size = self.trainX.shape[2]
         self.output_layer_size = self.trainY.shape[1]
         self.validation = Validation(self.model)
-        self.best_result = {'result': 0.0, 'architecture': {}}
+        self.best_result = best_result
 
         if pipeline_transform is not None:
             pipeline_transform.fit_transform(self.trainX)
             pipeline_transform.fit_transform(self.testX)
 
     @classmethod
-    def init_from_pandas_df(cls, pandas_dataframe, pandas_dataframe_test, train_columns=None, target_columns='willRise',
+    def init_from_pandas_df(cls, pandas_dataframe, pandas_dataframe_test, best_result, train_columns=None, target_columns='willRise',
                             pipeline_transform=None):
         trainX, trainY = timeseries.extract_keras_format_data(pandas_dataframe, train_columns, target_columns)
         testX, testY = timeseries.extract_keras_format_data(pandas_dataframe_test, train_columns, target_columns)
-        return cls(trainX, trainY, testX, testY)
+        return cls(trainX, trainY, testX, testY, best_result)
 
     @classmethod
-    def init_from_file(cls, train_file_path, test_file_path, train_columns, target_columns, usecols=(2, 3, 4, 5, 6, 7)):
+    def init_from_file(cls, train_file_path, test_file_path, train_columns, target_columns, best_result, usecols=(2, 3, 4, 5, 6, 7)):
         pandas_dataframe = pandas.read_csv(train_file_path, usecols=usecols, engine='python')
         pandas_dataframe_test = pandas.read_csv(test_file_path, usecols=usecols, engine='python')
-        return cls.init_from_pandas_df(pandas_dataframe, pandas_dataframe_test, train_columns, target_columns)
+        return cls.init_from_pandas_df(pandas_dataframe, pandas_dataframe_test, best_result, train_columns, target_columns)
 
     def build_optimized_hyper_lstm_two_hidden(self, hiden_layers=(200, 100), activation='sigmoid', dropout_rate_1=0.25,
                                               dropout_rate_2=0.45, optimizer='RMSprop', loss='mse',
@@ -188,11 +188,13 @@ class LSTMModelHandler:
         print("result" + str(acc))
         log.info("result" + str(acc))
 
-        if acc > self.best_result['result']:
+        if acc > self.best_result.result:
             print("There is a new best result for: " + str(params))
             print(str(acc))
-            self.best_result = {'result': acc, 'architecture': params}
+            self.best_result.result = acc
+            self.best_result.architecture = params
 
+        time.sleep(1)
 
         loss = 1.0 - acc
         return {'loss': loss, 'status': STATUS_OK}

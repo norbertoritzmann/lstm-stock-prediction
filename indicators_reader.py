@@ -3,6 +3,8 @@ from os import listdir
 from os.path import isfile, join
 
 import pandas
+import numpy as np
+np.random.seed(2013)
 
 from statistic import normalization
 from util import timeseries as ts
@@ -28,17 +30,17 @@ class IndicatorExtractor(object):
             print(f.replace(".csv", ""))
             pandas_dataframe = pandas.read_csv(join(train_file_path, f), engine='python', parse_dates=['Date'])
 
-            # Remove as primeiras 15 linhas
+            # Remove the first 15 lines
             pandas_dataframe = pandas_dataframe.iloc[15:]
 
-            # Remove a coluna Date e deixa como indexação
+            # Remove column Date and move for indexation
             dates = pandas_dataframe.pop('Date')
             pandas_dataframe.index = dates
 
             # 50% balanced sampling
             if indexes is None:
                 pandas_dataframe = ts.extract_and_append_next_day_will_rise(pandas_dataframe)
-                pandas_dataframe = pandas_dataframe.sample(frac=0.25, replace=False)
+                pandas_dataframe = pandas_dataframe.sample(frac=0.50, replace=False)
                 pandas_dataframe.sort_index(inplace=True)
                 indexes = pandas_dataframe.index
                 closes = pandas_dataframe['Close']

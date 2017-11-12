@@ -9,12 +9,17 @@ from keras import backend as K
 from genetic.individual import Individual
 from model_handler import LSTMModelHandler
 from util.indicatorutil import IndicatorRepository
-
+import time
 from deap import algorithms
 from deap import base
 from deap import creator
 from deap import tools
 
+class BestIndividual(object):
+    def __init__(self):
+        self.result = 0.0
+        self.chromosome = []
+        self.architecture = {}
 
 class Optimization(object):
     # Attributes ranges
@@ -42,7 +47,7 @@ class Optimization(object):
     WMA_MIN_MAX = (6, 11)
     PSY_MIN_MAX = (7, 14)
 
-    def __init__(self, stock_name, start_date, end_date, start_test_date, end_test_date, repository=None):
+    def __init__(self, stock_name, start_date, end_date, start_test_date, end_test_date, best_individual, repository=None):
         if repository == None:
             self.repository = IndicatorRepository(stock_name)
         else:
@@ -52,11 +57,12 @@ class Optimization(object):
         self.start_test_date = start_test_date
         self.end_test_date = end_test_date
         self.cache = {}
-        self.best_individual = {'result': 0.0}
+        self.best_individual = best_individual
         self.cycles = 0
 
     def fitness(self, chromosome):
         K.clear_session()
+        time.sleep(20)
         try:
             individual = Individual(chromosome, repository=self.repository, parameters=self)
 
@@ -74,17 +80,19 @@ class Optimization(object):
 
         result = self.calculate_accuracy(individual)
 
-        self.cache[individual.__str__()] = result['result']
+        self.cache[individual.__str__()] = result.result
 
-        if result['result'] > self.best_individual['result']:
-            self.best_individual = result
+        if result.result > self.best_individual.result:
+            self.best_individual.result = result.result
+            self.best_individual.architecture = result.architecture
+            self.best_individual.chromosome = chromosome
 
         print("---- Accuracy ----")
         log.info("---- Accuracy ----")
-        print(result['result'])
-        log.info(result['result'])
+        print(result.result)
+        log.info(result.result)
         self.cycles += 1
-        return (result['result'],)
+        return (result.result,)
 
     def check_bounds(self, first, second):
         def decorator(func):
@@ -183,7 +191,8 @@ class Optimization(object):
         train, test = individual.generate_dataset()
         log.info("Train Data:")
         log.info(train.head(5))
-        lstm_model_handler = LSTMModelHandler.init_from_pandas_df(pandas_dataframe=train, pandas_dataframe_test=test)
+        lstm_model_handler = LSTMModelHandler.init_from_pandas_df(pandas_dataframe=train, pandas_dataframe_test=test,
+                                                                  best_result=self.best_individual)
 
         # Build an optimezed hyper parameter LSTM model with two hidden layers
         #lstm_model_handler.build_lstm_two_hidden()

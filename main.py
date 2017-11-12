@@ -10,7 +10,7 @@ logging.basicConfig(filename='lstm_sized.log', filemode='w', level=logging.DEBUG
 
 app = Flask(__name__)
 
-opt = None
+best_result = None
 finished = False
 @app.route('/')
 def index():
@@ -18,27 +18,30 @@ def index():
 
 @app.route('/best')
 def current_the_best():
-    return str(opt.best_individual)
+    return str(best_result)
 
 @app.route('/status')
 def status():
     global finished
+
     if finished:
         return "Finished!"
     else:
-        return "Not finished! Best: " + str(opt.best_individual) + ", cycle: " + str(opt.cycles)
+        return "Not finished! Best: " + str(best_result)
 
 @app.route('/start_computing')
 def start_computing():
-    global opt
-    start_date = parser.parse("2005-01-01")
+    global best_result
+    best_result = optimization.BestIndividual()
+    start_date = parser.parse("2007-01-01")
     end_date = parser.parse("2009-12-31")
 
-    start_test_date = parser.parse("2010-01-01")
+    start_test_date = parser.parse("2012-01-01")
     end_test_date = parser.parse("2013-12-31")
 
     pool = Pool(processes=1)  # Start a worker processes.
-    opt = optimization.Optimization("msft", start_date, end_date, start_test_date, end_test_date)
+
+    opt = optimization.Optimization("msft", start_date, end_date, start_test_date, end_test_date, best_result)
     result = pool.apply_async(opt.run, callback=callback)
 
     #pop, log = optimization.run()
