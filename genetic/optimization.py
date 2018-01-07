@@ -92,6 +92,7 @@ class Optimization(object):
         print(result.result)
         log.info(result.result)
         self.cycles += 1
+        time.sleep(100)
         return (result.result,)
 
     def check_bounds(self, first, second):

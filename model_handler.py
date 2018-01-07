@@ -194,7 +194,7 @@ class LSTMModelHandler:
             self.best_result.result = acc
             self.best_result.architecture = params
 
-        time.sleep(1)
+        time.sleep(15)
 
         loss = 1.0 - acc
         return {'loss': loss, 'status': STATUS_OK}
