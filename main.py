@@ -1,4 +1,3 @@
-import logging
 from multiprocessing.pool import Pool
 
 from flask import Flask
@@ -7,6 +6,26 @@ from genetic import optimization
 
 import logging
 logging.basicConfig(filename='lstm_sized.log', filemode='w', level=logging.DEBUG)
+
+
+# create logger
+logger = logging.getLogger("Main")
+logger.setLevel(logging.DEBUG)
+
+# create console handler and set level to debug
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+
+# create formatter
+formatter = logging.Formatter("%(asctime)s;%(levelname)s;%(message)s", "%Y-%m-%d %H:%M:%S")
+
+# add formatter to ch
+ch.setFormatter(formatter)
+
+# add ch to logger
+logger.addHandler(ch)
+
+
 
 app = Flask(__name__)
 
@@ -50,13 +69,13 @@ def start_computing():
 
 def callback(pop, log):
     global finished
-    logging.info(":Best of the best:")
-    logging.info(str(optimization.best_individual))
+    logger.info(":Best of the best:")
+    logger.info(str(optimization.best_individual))
     finished = True
 
 @app.errorhandler(500)
 def server_error(e):
-    logging.exception('An error occurred during a request.')
+    logger.exception('An error occurred during a request.')
     return """
     An internal error occurred: <pre>{}</pre>
     See logs for full stacktrace.
@@ -66,6 +85,10 @@ def server_error(e):
 if __name__ == '__main__':
     # This is used when running locally. Gunicorn is used to run the
     # application on Google App Engine. See entrypoint in app.yaml.
-    logging.info("Starting...")
-    app.run(host='127.0.0.1', port=8080, debug=True)
+    logger.info("Starting...")
+    try:
+        app.run(host='127.0.0.1', port=8080, debug=True)
+    except Exception as e:
+        logger.error(e)
+        logger.info("Finishing...")
 # [END app]

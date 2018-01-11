@@ -3,23 +3,49 @@ import numpy
 numpy.random.seed(640)
 import array
 import random
-import logging as log
+import logging
+import time
 from keras import backend as K
 
 from genetic.individual import Individual
 from model_handler import LSTMModelHandler
 from util.indicatorutil import IndicatorRepository
-import time
 from deap import algorithms
 from deap import base
 from deap import creator
 from deap import tools
+
+logging.basicConfig(filename='lstm_sized.log', filemode='w', level=logging.DEBUG)
+
+
+# create logger
+log = logging.getLogger("Optimization")
+log.setLevel(logging.DEBUG)
+
+# create console handler and set level to debug
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+
+# create formatter
+formatter = logging.Formatter("%(asctime)s;%(levelname)s;%(message)s", "%Y-%m-%d %H:%M:%S")
+
+# add formatter to ch
+ch.setFormatter(formatter)
+
+# add ch to logger
+log.addHandler(ch)
+
+
+
 
 class BestIndividual(object):
     def __init__(self):
         self.result = 0.0
         self.chromosome = []
         self.architecture = {}
+
+    def __str__(self):
+        return "Result: " + str(self.result) + "\nChromosome: " + str(self.chromosome) + "\nArchitecture: " + str(self.architecture)
 
 class Optimization(object):
     # Attributes ranges
@@ -70,6 +96,7 @@ class Optimization(object):
             print("%%%%%%%%%%")
             print(e)
             print("%%%%%%%%%%")
+            log.error(e)
             return (0.5,)
         log.info("--------- EVALUATING ---------")
         log.info(individual)
@@ -83,6 +110,8 @@ class Optimization(object):
         self.cache[individual.__str__()] = result.result
 
         if result.result > self.best_individual.result:
+            log.info("NEW GLOBAL BEST RESULT")
+            log.info(result.result)
             self.best_individual.result = result.result
             self.best_individual.architecture = result.architecture
             self.best_individual.chromosome = chromosome
@@ -92,21 +121,27 @@ class Optimization(object):
         print(result.result)
         log.info(result.result)
         self.cycles += 1
-        time.sleep(100)
+        time.sleep(50)
         return (result.result,)
 
     def check_bounds(self, first, second):
+
         def decorator(func):
             def wrapper(*args, **kargs):
-                offspring = func(*args, **kargs)
-                for child in offspring:
-                    for i in range(len(child)):
-                        min_value = Optimization.MIN_MAX[i][0]
-                        max_value = Optimization.MIN_MAX[i][1]
-                        if child[i] > max_value:
-                            child[i] = max_value
-                        elif child[i] < min_value:
-                            child[i] = min_value
+                try:
+                    offspring = func(*args, **kargs)
+                    for child in offspring:
+                        for i in range(len(child)):
+                            min_value = Optimization.MIN_MAX[i][0]
+                            max_value = Optimization.MIN_MAX[i][1]
+                            if child[i] > max_value:
+                                child[i] = max_value
+                            elif child[i] < min_value:
+                                child[i] = min_value
+                except Exception as e:
+                    log.error(e)
+                    raise e
+
                 return offspring
 
             return wrapper
@@ -197,7 +232,15 @@ class Optimization(object):
 
         # Build an optimezed hyper parameter LSTM model with two hidden layers
         #lstm_model_handler.build_lstm_two_hidden()
-        lstm_model_handler.build_and_train_lstm_hyperparameter_opt_two_hidden()
+        try:
+
+            lstm_model_handler.build_and_train_lstm_hyperparameter_opt_two_hidden()
+        except Exception as e:
+            log.error("NÃO FOI POSSÍVEL FINALIZAR")
+            log.error(e)
+
+            raise e
+
 
         return lstm_model_handler.best_result
 

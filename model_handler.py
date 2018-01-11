@@ -1,4 +1,4 @@
-import logging as log
+import logging
 
 import numpy
 
@@ -12,6 +12,27 @@ import time
 import pandas
 from model_validation import Validation
 from util import timeseries
+
+logging.basicConfig(filename='lstm_sized.log', filemode='w', level=logging.DEBUG)
+
+
+# create logger
+log = logging.getLogger("ModelHandler")
+log.setLevel(logging.DEBUG)
+
+# create console handler and set level to debug
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+
+# create formatter
+formatter = logging.Formatter("%(asctime)s;%(levelname)s;%(message)s", "%Y-%m-%d %H:%M:%S")
+
+# add formatter to ch
+ch.setFormatter(formatter)
+
+# add ch to logger
+log.addHandler(ch)
+
 
 
 class LSTMModelHandler:
@@ -89,6 +110,7 @@ class LSTMModelHandler:
 
         except TypeError as e:
             print(e)
+            log.error(e, e.args)
             raise e
 
         return self.model
@@ -127,11 +149,12 @@ class LSTMModelHandler:
             log.info(":BEST:")
             log.info(best)
 
-
-            print("Compilation Time %n ", ((time.time() - start) * 6))
+            log.info("Hyper Param Optimization Time: ")
+            log.info(str(((time.time() - start) * 6)))
 
         except TypeError as e:
             print(e)
+            log.error(e, e.args)
             raise e
 
         return self.model
@@ -156,7 +179,7 @@ class LSTMModelHandler:
         loss = 'mse'
         metrics = ['accuracy']
 
-        print(str((self.trainX.shape[1], self.trainX.shape[2])))
+        print("Shape: " + str((self.trainX.shape[1], self.trainX.shape[2])))
         self.model = Sequential()
         self.validation = Validation(self.model)
 
@@ -194,7 +217,8 @@ class LSTMModelHandler:
             self.best_result.result = acc
             self.best_result.architecture = params
 
-        time.sleep(15)
+        log.info("Dormindo por: " + str(5 * self.trainX.shape[2]))
+        time.sleep(5 * self.trainX.shape[2])
 
         loss = 1.0 - acc
         return {'loss': loss, 'status': STATUS_OK}
