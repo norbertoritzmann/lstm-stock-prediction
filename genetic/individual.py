@@ -1,6 +1,7 @@
 from util.indicatorutil import IndicatorEnum
 import logging as log
 from pandas import DataFrame as df
+from util.targettransformer import TargetTransformer
 
 class Individual(object):
 

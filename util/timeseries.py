@@ -1,6 +1,36 @@
 import numpy
 import pandas as pd
 
+
+def extract_and_append_next_day_close(df):
+    next_days = extract_next_day_close(df)
+    willRiseSeries = pd.Series(next_days, index=df.index)
+    #temp = df[['Close']]
+    #temp['willRise'] = willRiseSeries
+    df['willRise'] = willRiseSeries
+    return df
+    #df['willRise'] = pd.DataFrame({'Date': df["Date"], 'Close': df["Close"], 'willRise': willRiseSeries})
+
+
+def extract_next_day_close(df):
+    closings = df["Close"]
+    #df['willRise'] = 1
+    next_days = []
+    next_day_index = 1
+    #next_days.append(0)
+
+    for today_close in closings:
+        if next_day_index == len(closings):
+            next_days.append(today_close)
+            break
+
+        next_days.append(closings[next_day_index])
+
+        next_day_index += 1
+
+    return next_days
+
+
 def extract_and_append_next_day_will_rise(df):
     next_days = extract_next_day_will_rise(df)
     willRiseSeries = pd.Series(next_days, index=df.index)
@@ -9,6 +39,7 @@ def extract_and_append_next_day_will_rise(df):
     df['willRise'] = willRiseSeries
     return df
     #df['willRise'] = pd.DataFrame({'Date': df["Date"], 'Close': df["Close"], 'willRise': willRiseSeries})
+
 
 def extract_next_day_will_rise(df):
     closings = df["Close"]

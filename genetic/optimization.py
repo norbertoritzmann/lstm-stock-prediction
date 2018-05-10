@@ -14,6 +14,7 @@ from deap import algorithms
 from deap import base
 from deap import creator
 from deap import tools
+from util import timeseries as ts, targettransformer as tf
 
 logging.basicConfig(filename='lstm_sized.log', filemode='w', level=logging.DEBUG)
 
@@ -73,9 +74,10 @@ class Optimization(object):
     WMA_MIN_MAX = (6, 11)
     PSY_MIN_MAX = (7, 14)
 
-    def __init__(self, stock_name, start_date, end_date, start_test_date, end_test_date, best_individual, repository=None):
+    def __init__(self, stock_name, start_date, end_date, start_test_date, end_test_date,
+                 best_individual, target_extractor=tf.WILL_RISE, repository=None):
         if repository == None:
-            self.repository = IndicatorRepository(stock_name)
+            self.repository = IndicatorRepository(stock_name=stock_name, target_transformer=target_extractor)
         else:
             self.repository = repository
         self.start_date = start_date
@@ -227,6 +229,8 @@ class Optimization(object):
         train, test = individual.generate_dataset()
         log.info("Train Data:")
         log.info(train.head(5))
+        log.info("Test Data:")
+        log.info(test.head(5))
         lstm_model_handler = LSTMModelHandler.init_from_pandas_df(pandas_dataframe=train, pandas_dataframe_test=test,
                                                                   best_result=self.best_individual)
 

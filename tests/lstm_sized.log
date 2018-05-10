@@ -1,0 +1,4 @@
+INFO:hyperopt.tpe:tpe_transform took 0.066921 seconds
+INFO:hyperopt.tpe:TPE using 0 trials
+INFO:ModelHandler:resultNone
+INFO:hyperopt.fmin:job exception: 'float' object has no attribute 'result'

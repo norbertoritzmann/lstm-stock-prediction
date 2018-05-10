@@ -29,18 +29,18 @@ class MyTestCase(unittest.TestCase):
         log.info(train.head(5))
         lstm_model_handler1 = LSTMModelHandler.init_from_pandas_df(pandas_dataframe=train, pandas_dataframe_test=test)
         lstm_model_handler1.build_lstm_two_hidden()
-        result1 = lstm_model_handler1.test_measurements()
+        result1 = lstm_model_handler1.evaluate()
 
         lstm_model_handler2 = LSTMModelHandler.init_from_pandas_df(pandas_dataframe=train, pandas_dataframe_test=test)
         lstm_model_handler2.build_lstm_two_hidden()
-        result2 = lstm_model_handler2.test_measurements()
+        result2 = lstm_model_handler2.evaluate()
 
         lstm_model_handler3 = LSTMModelHandler.init_from_pandas_df(pandas_dataframe=train, pandas_dataframe_test=test)
         lstm_model_handler3.build_lstm_two_hidden()
-        result3 = lstm_model_handler3.test_measurements()
+        result3 = lstm_model_handler3.evaluate()
 
         lstm_model_handler4 = LSTMModelHandler.init_from_pandas_df(pandas_dataframe=train, pandas_dataframe_test=test)
-        result4 = lstm_model_handler4.test_measurements()
+        result4 = lstm_model_handler4.evaluate()
 
         self.assertEqual(result1, result2)
         self.assertEqual(result2, result3)

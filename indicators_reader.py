@@ -7,17 +7,18 @@ import numpy as np
 np.random.seed(2013)
 
 from statistic import normalization
-from util import timeseries as ts
+from util import timeseries as ts, targettransformer as tf
 
 
 class IndicatorExtractor(object):
 
-    def extract_indicators(self, stock, directory_base = "/database/sized/"):
+    def extract_indicators(self, stock, directory_base="/database/sized/", target_extractor=tf.WILL_RISE):
         """
         :type stock: stock code name (example: msft)
         :type directory_base: path to root stocks data
+        :type target_extractor: target data transformer instance, needs to extends TargetTransformer @see util.targettransformer
         """
-        print("Extracting on: " + os.getcwd() + directory_base + stock)
+        # print("Extracting on: " + os.getcwd() + directory_base + stock)
         train_file_path = os.getcwd() + directory_base + stock
 
         onlyfiles = [f for f in listdir(train_file_path) if isfile(join(train_file_path, f))]
@@ -39,7 +40,7 @@ class IndicatorExtractor(object):
 
             # 50% balanced sampling
             if indexes is None:
-                pandas_dataframe = ts.extract_and_append_next_day_will_rise(pandas_dataframe)
+                pandas_dataframe = target_extractor.transform(pandas_dataframe)
                 pandas_dataframe = pandas_dataframe.sample(frac=0.50, replace=False)
                 pandas_dataframe.sort_index(inplace=True)
                 indexes = pandas_dataframe.index
@@ -59,7 +60,7 @@ class IndicatorExtractor(object):
 
         pandas_dataframe = pandas.read_csv(join(train_file_path, onlyfiles[0]), engine='python', parse_dates=['Date'])
 
-        database['willRise'] = ts.extract_and_append_next_day_will_rise(pandas_dataframe)
+        database['willRise'] = target_extractor.transform(pandas_dataframe)
         database['willRise'].index = database['willRise'].pop('Date')
         database['Close'] = closes
 

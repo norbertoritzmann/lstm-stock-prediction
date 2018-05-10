@@ -5,6 +5,9 @@ from dateutil import parser
 from genetic import optimization
 
 import logging
+
+import util.targettransformer as tf
+
 logging.basicConfig(filename='lstm_sized.log', filemode='w', level=logging.DEBUG)
 
 
@@ -33,7 +36,7 @@ best_result = None
 finished = False
 @app.route('/')
 def index():
-    return "Welcome: <a href='/start_computing'"
+    return "Welcome: <a href='/start_computing'>Start</a>"
 
 @app.route('/best')
 def current_the_best():
@@ -55,12 +58,33 @@ def start_computing():
     start_date = parser.parse("2007-01-01")
     end_date = parser.parse("2009-12-31")
 
-    start_test_date = parser.parse("2012-01-01")
+    start_test_date = parser.parse("2010-01-01")
     end_test_date = parser.parse("2013-12-31")
 
     pool = Pool(processes=1)  # Start a worker processes.
 
-    opt = optimization.Optimization("msft", start_date, end_date, start_test_date, end_test_date, best_result)
+    opt = optimization.Optimization("msft", start_date, end_date, start_test_date, end_test_date, best_result,
+                                    target_extractor=tf.WILL_RISE)
+    result = pool.apply_async(opt.run, callback=callback)
+
+    #pop, log = optimization.run()
+
+    return 'Processamento Iniciado!'
+
+@app.route('/start_regression')
+def start_regression():
+    global best_result
+    best_result = optimization.BestIndividual()
+    start_date = parser.parse("2007-01-01")
+    end_date = parser.parse("2009-12-31")
+
+    start_test_date = parser.parse("2010-01-01")
+    end_test_date = parser.parse("2013-12-31")
+
+    pool = Pool(processes=1)  # Start a worker processes.
+
+    opt = optimization.Optimization("msft", start_date, end_date, start_test_date, end_test_date, best_result,
+                                    target_extractor=tf.CLOSE)
     result = pool.apply_async(opt.run, callback=callback)
 
     #pop, log = optimization.run()

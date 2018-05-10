@@ -36,31 +36,51 @@ log.addHandler(ch)
 
 
 class LSTMModelHandler:
-    def __init__(self, trainX, trainY, testX, testY, best_result, pipeline_transform=None):
+
+    def __init__(self, trainX, trainY, testX, testY, best_result=None, pipeline_transform=None, is_regression=False):
+
+        # Splits testX in testX and holdoutX
+        splitX = numpy.split(testX, 2)
+        self.testX = splitX[0]
+        self.holdoutX = splitX[1]
+
+        # Splits testY in testY and holdoutY
+        splitY = numpy.split(testY, 2)
+        self.testY = splitY[0]
+        self.holdoutY = splitY[1]
+
         self.trainX, self.trainY = trainX, trainY
-        self.testX, self.testY = testX, testY
+        # self.testX, self.testY = testX, testY
         self.model = Sequential()
         self.input_layer_size = self.trainX.shape[2]
         self.output_layer_size = self.trainY.shape[1]
-        self.validation = Validation(self.model)
+        self.validation = Validation.get_instance(self.model, is_regression)
+
+        if best_result is None:
+            if is_regression:
+                self.best_result = 1.0
+            else:
+                self.best_result = 0.5
         self.best_result = best_result
 
         if pipeline_transform is not None:
             pipeline_transform.fit_transform(self.trainX)
             pipeline_transform.fit_transform(self.testX)
 
-    @classmethod
-    def init_from_pandas_df(cls, pandas_dataframe, pandas_dataframe_test, best_result, train_columns=None, target_columns='willRise',
-                            pipeline_transform=None):
-        trainX, trainY = timeseries.extract_keras_format_data(pandas_dataframe, train_columns, target_columns)
-        testX, testY = timeseries.extract_keras_format_data(pandas_dataframe_test, train_columns, target_columns)
-        return cls(trainX, trainY, testX, testY, best_result)
+        self.is_regression = is_regression
 
     @classmethod
-    def init_from_file(cls, train_file_path, test_file_path, train_columns, target_columns, best_result, usecols=(2, 3, 4, 5, 6, 7)):
+    def init_from_pandas_df(cls, pandas_dataframe, pandas_dataframe_test, best_result=None, train_columns=None, target_columns='willRise',
+                            is_regression=False):
+        trainX, trainY = timeseries.extract_keras_format_data(pandas_dataframe, train_columns, target_columns)
+        testX, testY = timeseries.extract_keras_format_data(pandas_dataframe_test, train_columns, target_columns)
+        return cls(trainX, trainY, testX, testY, best_result=best_result, is_regression=is_regression)
+
+    @classmethod
+    def init_from_file(cls, train_file_path, test_file_path, train_columns, target_columns, best_result, usecols=(2, 3, 4, 5, 6, 7), is_regression=False):
         pandas_dataframe = pandas.read_csv(train_file_path, usecols=usecols, engine='python')
         pandas_dataframe_test = pandas.read_csv(test_file_path, usecols=usecols, engine='python')
-        return cls.init_from_pandas_df(pandas_dataframe, pandas_dataframe_test, best_result, train_columns, target_columns)
+        return cls.init_from_pandas_df(pandas_dataframe, pandas_dataframe_test, best_result, train_columns, target_columns, is_regression)
 
     def build_optimized_hyper_lstm_two_hidden(self, hiden_layers=(200, 100), activation='sigmoid', dropout_rate_1=0.25,
                                               dropout_rate_2=0.45, optimizer='RMSprop', loss='mse',
@@ -119,10 +139,10 @@ class LSTMModelHandler:
         start = time.time()
 
         try:
-            num_units_lstm = [80, 100, 150, 200, 300, 400, 500]
-            dropout_rate = [0.25, 0.45, 0.55]
-            activations = ['sigmoid', 'relu']
-            optimizations = ['adam', 'rmsprop']
+            num_units_lstm = [80, 90, 100, 150, 200]
+            dropout_rate = [0.25, 0.35, 0.45]
+            activations = ['softmax', 'relu']
+            optimizations = ['rmsprop']
             epoch_sizes = [80, 90, 100, 110]
 
             space = {
@@ -149,8 +169,8 @@ class LSTMModelHandler:
             log.info(":BEST:")
             log.info(best)
 
-            log.info("Hyper Param Optimization Time: ")
-            log.info(str(((time.time() - start) * 6)))
+            log.info("Hyper Param Optimization Time (sec): ")
+            log.info(str((time.time() - start)))
 
         except TypeError as e:
             print(e)
@@ -169,10 +189,15 @@ class LSTMModelHandler:
             #    , callbacks=[tensorCallback]
         )
 
-    def test_measurements(self):
-        predicted = self.validation.predict_point_by_point(self.testX)
+    def prediction(self):
+        predicted = self.validation.predict_point_by_point(self.holdoutX)
 
-        return self.validation.mesure_accuracy(predicted, self.testY)
+        return predicted
+
+    def evaluate(self):
+        predicted = self.prediction()
+
+        return self.validation.evaluate(predicted, self.holdoutY)
 
     def hyper_optimization(self, params):
         K.clear_session()
@@ -204,21 +229,24 @@ class LSTMModelHandler:
         self.model.add(Dense(units=self.output_layer_size))
         self.model.add(Activation(params['activation']))
 
-        self.model.compile(loss=loss, optimizer=params['optimizer'], metrics=metrics)  # binary_crossentropy
+        self.model.compile(loss=loss, optimizer=params['optimizer'])  #, metrics=metrics binary_crossentropy
 
         self.train(validation_data=(self.testX, self.testY), epoch=params['nb_epochs'])
-        acc = self.test_measurements()
-        print("result" + str(acc))
-        log.info("result" + str(acc))
+        evaluation = self.evaluate()
+        print("result" + str(evaluation))
+        log.info("result" + str(evaluation))
 
-        if acc > self.best_result.result:
+        if self.validation.is_result_better_than(evaluation, self.best_result.result):
             print("There is a new best result for: " + str(params))
-            print(str(acc))
-            self.best_result.result = acc
+            print(str(evaluation))
+            self.best_result.result = evaluation
             self.best_result.architecture = params
 
         log.info("Dormindo por: " + str(5 * self.trainX.shape[2]))
         time.sleep(5 * self.trainX.shape[2])
 
-        loss = 1.0 - acc
-        return {'loss': loss, 'status': STATUS_OK}
+        if self.is_regression:
+            return {'loss': evaluation, 'status': STATUS_OK}
+        else:
+            loss = 1.0 - evaluation
+            return {'loss': loss, 'status': STATUS_OK}

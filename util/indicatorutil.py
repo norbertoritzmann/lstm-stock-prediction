@@ -3,6 +3,9 @@ from enum import Enum
 import pandas as pd
 from dateutil import parser
 
+import util.targettransformer as tf
+
+
 class IndicatorEnum(Enum):
     ADX = "ADX"
     CCI = "CCI"
@@ -14,9 +17,9 @@ class IndicatorEnum(Enum):
 
 class IndicatorRepository(object):
 
-    def __init__(self, stock_name, directory_base = "/database/sized/"):
+    def __init__(self, stock_name, directory_base="/database/sized/", target_transformer=tf.WILL_RISE):
         extractor = IndicatorExtractor()
-        self.database = extractor.extract_indicators(stock_name, directory_base)
+        self.database = extractor.extract_indicators(stock_name, directory_base, target_transformer)
         
         #for df in self.database:
          #   pd.to_datetime(self.database[df]['Date'])
