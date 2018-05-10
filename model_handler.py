@@ -62,6 +62,7 @@ class LSTMModelHandler:
             else:
                 self.best_result = 0.5
         self.best_result = best_result
+        self.best_model = Sequential()
 
         if pipeline_transform is not None:
             pipeline_transform.fit_transform(self.trainX)
@@ -241,6 +242,7 @@ class LSTMModelHandler:
             print(str(evaluation))
             self.best_result.result = evaluation
             self.best_result.architecture = params
+            self.best_model = self.model
 
         log.info("Dormindo por: " + str(5 * self.trainX.shape[2]))
         time.sleep(5 * self.trainX.shape[2])

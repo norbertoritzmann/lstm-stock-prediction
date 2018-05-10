@@ -1,11 +1,15 @@
 import json
 import numpy
+
+from model_io import ModelIO
+
 numpy.random.seed(640)
 import array
 import random
 import logging
 import time
 from keras import backend as K
+from keras.models import Sequential
 
 from genetic.individual import Individual
 from model_handler import LSTMModelHandler
@@ -17,7 +21,6 @@ from deap import tools
 from util import timeseries as ts, targettransformer as tf
 
 logging.basicConfig(filename='lstm_sized.log', filemode='w', level=logging.DEBUG)
-
 
 # create logger
 log = logging.getLogger("Optimization")
@@ -86,7 +89,9 @@ class Optimization(object):
         self.end_test_date = end_test_date
         self.cache = {}
         self.best_individual = best_individual
+        self.best_model = Sequential()
         self.cycles = 0
+        self.modelio = ModelIO()
 
     def fitness(self, chromosome):
         K.clear_session()
@@ -107,24 +112,26 @@ class Optimization(object):
             log.info("Using from cache(" + str(individual) + "): " + str(self.cache[individual.__str__()]))
             return (self.cache[individual.__str__()],)
 
-        result = self.calculate_accuracy(individual)
+        lstm_model_handler = self.calculate_accuracy(individual)
 
-        self.cache[individual.__str__()] = result.result
+        self.cache[individual.__str__()] = lstm_model_handler.result.result
 
-        if result.result > self.best_individual.result:
+        if lstm_model_handler.result.result > self.best_individual.result:
             log.info("NEW GLOBAL BEST RESULT")
-            log.info(result.result)
-            self.best_individual.result = result.result
-            self.best_individual.architecture = result.architecture
+            log.info(lstm_model_handler.result.result)
+            self.best_individual.result = lstm_model_handler.result.result
+            self.best_individual.architecture = lstm_model_handler.result.architecture
             self.best_individual.chromosome = chromosome
+            self.best_model = lstm_model_handler.best_model
+            self.modelio.save(self.best_model)
 
         print("---- Accuracy ----")
         log.info("---- Accuracy ----")
-        print(result.result)
-        log.info(result.result)
+        print(lstm_model_handler.result.result)
+        log.info(lstm_model_handler.result.result)
         self.cycles += 1
         time.sleep(50)
-        return (result.result,)
+        return (lstm_model_handler.result.result,)
 
     def check_bounds(self, first, second):
 
@@ -246,7 +253,7 @@ class Optimization(object):
             raise e
 
 
-        return lstm_model_handler.best_result
+        return lstm_model_handler
 
     def init_individual(self, icls, content):
         return icls(content)
